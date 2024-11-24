@@ -1,13 +1,10 @@
 <?php
-
-include_once "../includes/Database.php";
 include_once "../user/User.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     try {
-        $db = new Database(); //Database-object
-        $user = new User($db); //Gives Database-object to User-object
+        $user = new User(); //Creat User-object
 
         if (isset($_POST["register"])) {
             $user->register($_POST["username"], $_POST["password"]);

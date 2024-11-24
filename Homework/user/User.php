@@ -1,10 +1,12 @@
 <?php
+include_once "../includes/Database.php";
+
 class User
 {
     private $db;
 
-    public function __construct($db) {
-        $this->db = $db; // Pass database object ($db) to User-class
+    public function __construct() {
+        $this->db = new Database(); // Creat Database object in User-class construct
         session_start(); //Start session in __construct for each new user
     }
 
