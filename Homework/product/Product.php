@@ -23,4 +23,13 @@ class Product
 
         return $this->db->run($sql, $params);
     }
+
+    // Select alle producten van Database
+    public function getAllProducts() {
+        $sql = "SELECT * FROM producten";
+        return $this->db->run($sql)->fetchAll(); // Haalt alle rijen op als een associatieve array
+    }
+
+
+
 }
