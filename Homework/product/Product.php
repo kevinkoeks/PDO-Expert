@@ -26,9 +26,37 @@ class Product
 
     // Select alle producten van Database
     public function getAllProducts() {
-        $sql = "SELECT * FROM producten";
-        return $this->db->run($sql)->fetchAll(); // Haalt alle rijen op als een associatieve array
+        $sql = "SELECT * FROM products";
+        return $this->db->run($sql)->fetchAll(); // Haalt alle rijen op uit de MySQL-database
     }
+
+    // Nodig voor update van 1 product
+    public function getProductById($productID) {
+        $sql = "SELECT * FROM products WHERE productID = :productID";
+
+        $params = ["productID" => $productID];
+
+        return $this->db->run($sql, $params)->fetch(); // Haalt 1 rij op uit de MySQL-database
+    }
+
+    // Update gegevens van een product
+    public function updateProduct($productID, $productNaam, $omschrijving, $prijsPerStuk, $fotoPad) {
+        $sql = "UPDATE products 
+                SET productNaam = :productNaam, omschrijving = :omschrijving, prijsPerStuk = :prijsPerStuk, foto = :foto 
+                WHERE productID = :productID";
+        
+        $params = [
+            ':productNaam' => $productNaam,
+            ':omschrijving' => $omschrijving,
+            ':prijsPerStuk' => $prijsPerStuk,
+            ':foto' => $fotoPad,
+            ':productID' => $productID
+        ];
+
+        // Geeft een true of false terug
+        return $this->db->run($sql, $params) ? true : false;
+    }
+
 
 
 
